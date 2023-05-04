@@ -1,0 +1,6 @@
+.box-input__buttons{
+  margin-left: 20%;
+  display: flex;
+  justify-content: space-between;
+  width: 70%;
+}

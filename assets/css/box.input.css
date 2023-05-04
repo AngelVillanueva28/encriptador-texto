@@ -1,0 +1,11 @@
+.box-input{
+  width: 75%;
+}
+
+.box-input p{
+  margin: 16px 0 16px 20% ;
+  background-image: url(../img/exclamation.png);
+  background-repeat: no-repeat;
+  padding-left: 20px;
+  color: var(--secundary-color);
+}
