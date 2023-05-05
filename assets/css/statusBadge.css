@@ -1,10 +1,9 @@
-.mensaje-confirmacion {
+.badge {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  background-color: #4CAF50;
-  color: white;
+  color: #ffffff;
   text-align: center;
   padding: 16px;
   opacity: 0;
@@ -12,6 +11,16 @@
   font-family: var(--font);
 }
 
-.mensaje-confirmacion.mostrar {
+.badge__status-success {
+  background-color: #008000;
+}
+
+.badge__status-failure {
+  background-color: #800000;
+}
+
+.badge.mostrar {
   opacity: 1;
 }
+
+.

@@ -1,11 +1,20 @@
 .box-input{
   width: 75%;
+  min-height: 100vh;
+  height: auto;
+}
+.counter, .suggestion{
+  color: var(--secundary-color);
 }
 
-.box-input p{
+.counter{
+  padding: 0;
+  margin-left: 85%;
+}
+
+.suggestion{
   margin: 16px 0 16px 20% ;
+  padding-left: 20px;
   background-image: url(../img/exclamation.png);
   background-repeat: no-repeat;
-  padding-left: 20px;
-  color: var(--secundary-color);
 }

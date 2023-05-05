@@ -4,6 +4,7 @@ const btnCopiar = document.getElementById("btnCopiar");
 const entrada = document.getElementById("entrada");
 const salida = document.getElementById("salida");
 const salidaVacia = document.getElementById("cajavacia");
+const contador = document.getElementById("counter");
 
 const letterToWord = {
   e: "enter",
@@ -20,17 +21,26 @@ const wordToLetter = {
   ufat: "u",
 };
 
+function limpiarEntrada(texto) {
+  salida.value = texto;
+  console.log(salida.value);
+
+  entrada.value = "";
+  mostrarBotonCopiar();
+}
+
 btnEncriptar.addEventListener("click", () => {
   let texto = String(entrada.value).replace(
     /(e)|(i)|(a)|(o)|(u)/g,
     (letter) => letterToWord[letter]
   );
 
-  salida.value = texto;
-  console.log(salida.value);
-
-  entrada.value = "";
-  mostrarBotonCopiar();
+  if (validarEntrada(texto)) {
+    limpiarEntrada(texto);
+  } else {
+    const status = crearMensajeEstado("Ingrese un texto");
+    mostrarMensajeEstado(status, "badge__status-failure");
+  }
 });
 
 btnDesencriptar.addEventListener("click", () => {
@@ -39,43 +49,48 @@ btnDesencriptar.addEventListener("click", () => {
     (word) => wordToLetter[word]
   );
 
-  salida.value = texto;
-  console.log(salida.value);
-  entrada.value = "";
-  mostrarBotonCopiar();
+  if (validarEntrada(texto)) {
+    limpiarEntrada(texto);
+  }
 });
 
 btnCopiar.addEventListener("click", () => {
   let texto = String(salida.value);
+  let status;
 
   if (!navigator.clipboard) {
     fallbackCopyTextToClipboard(texto);
     return;
   }
+
   navigator.clipboard.writeText(texto).then(
     function () {
-      const entrada = document.createElement("div");
-      entrada.innerHTML = "¡Contenido copiado al portapapeles!";
-      entrada.classList.add("mensaje-confirmacion");
-      document.body.appendChild(entrada);
-
-      mostrarMensajeConfirmacion(entrada);
+      status = crearMensajeEstado("¡Contenido copiado al portapapeles!");
+      mostrarMensajeEstado(status, "badge__status-success");
     },
     (err) => {
-      console.error("Error al copiar texto al portapapeles: ", err);
+      status = crearMensajeEstado("Error al copiar texto al portapapeles");
     }
   );
 
   salida.value = "";
 });
 
-function mostrarMensajeConfirmacion(entrada) {
-  entrada.classList.add("mostrar");
+function crearMensajeEstado(mensaje) {
+  const status = document.createElement("div");
+  status.innerHTML = mensaje;
+  status.classList.add("badge");
+  document.body.appendChild(status);
+  return status;
+}
+
+function mostrarMensajeEstado(status, estilo) {
+  status.classList.add("mostrar", estilo);
   setTimeout(() => {
-    entrada.classList.remove("mostrar");
+    status.classList.remove("mostrar", estilo);
   }, 3000);
   setTimeout(() => {
-    entrada.remove();
+    status.remove();
   }, 3300);
   ocultarBotonCopiar();
 }
@@ -86,6 +101,8 @@ const mostrarBotonCopiar = () => {
 
   mostrarTexto();
   mostrarMensaje();
+  console.log(entrada.value.length)
+  contador.textContent = entrada.value.length + "/450";
 };
 const ocultarBotonCopiar = () => {
   btnCopiar.classList.remove("btn", "input__btnCopiar");
@@ -93,24 +110,41 @@ const ocultarBotonCopiar = () => {
 
   ocultarTexto();
   ocultarMensaje();
+  console.log(entrada.value.length)
 };
 
-function ocultarMensaje(){
-  salidaVacia.classList.remove("box-output__fill");
-  salidaVacia.classList.add("box-output__empty");
+function toggleClass(tag, classToRemove, classToAdd) {
+  tag.classList.remove(classToRemove);
+  tag.classList.add(classToAdd);
 }
 
-function mostrarMensaje(){
-  salidaVacia.classList.remove("box-output__empty");
-  salidaVacia.classList.add("box-output__fill");
+const ocultarMensaje = () =>
+  toggleClass(salidaVacia, "box-output__fill", "box-output__empty");
+
+const mostrarMensaje = () =>
+  toggleClass(salidaVacia, "box-output__empty", "box-output__fill");
+
+const ocultarTexto = () =>
+  toggleClass(salida, "output__output", "output__output-ocultar");
+
+const mostrarTexto = () =>
+  toggleClass(salida, "output__output-ocultar", "output__output");
+
+function validarEntrada(content) {
+  return content.length > 0;
 }
 
-function ocultarTexto(){
-  salida.classList.remove("output__output");
-  salida.classList.add("output__output-ocultar");
-}
+entrada.addEventListener("input", () => {
+  if(entrada.value.length > 450){
+    entrada.value = entrada.value.substring(0, 450);
+  }
 
-function mostrarTexto(){
-  salida.classList.remove("output__output-ocultar");
-  salida.classList.add("output__output");
-}
+  contador.textContent = entrada.value.length + "/450";
+  entrada.style.height = "auto";
+  entrada.style.height = entrada.scrollHeight + "px";
+});
+
+salida.addEventListener("input", () => {
+  salida.style.height = "auto";
+  salida.style.height = salida.scrollHeight + "px";
+});
