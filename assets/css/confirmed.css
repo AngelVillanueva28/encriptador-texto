@@ -1,0 +1,17 @@
+.mensaje-confirmacion {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: #4CAF50;
+  color: white;
+  text-align: center;
+  padding: 16px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  font-family: var(--font);
+}
+
+.mensaje-confirmacion.mostrar {
+  opacity: 1;
+}

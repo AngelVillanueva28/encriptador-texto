@@ -7,5 +7,17 @@
 .input__btnDesencriptar{
   color: var(--primary-color);
   background-color: var(--second--color-btn);
-  border: 1px solid #0A3871;
+  border: 1px solid var(--primary-color);
+}
+
+.input__btnCopiar{
+  width: 90%;
+  justify-self: center;
+  background-color: #ffffff;
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+}
+
+.input__btnCopiar-ocultar{
+  display: none;
 }
