@@ -6,6 +6,6 @@
 
 .input__btnDesencriptar{
   color: var(--primary-color);
-  background-color: var(--background-color);
+  background-color: var(--second--color-btn);
   border: 1px solid #0A3871;
 }

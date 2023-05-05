@@ -17,11 +17,12 @@
     <link rel="stylesheet" href="./assets/css/box.main.css" />
     <link rel="stylesheet" href="./assets/css/box.input.css" />
     <link rel="stylesheet" href="./assets/css/box.output.css" />
-    <link rel="stylesheet" href="./assets/css/input-input.css">
-    <link rel="stylesheet" href="assets/css/box.buttons.css">
-    <link rel="stylesheet" href="assets/css/btn.css">
-    <link rel="stylesheet" href="assets/css/output-output.css">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/input-input.css" />
+    <link rel="stylesheet" href="assets/css/box.buttons.css" />
+    <link rel="stylesheet" href="assets/css/btn.css" />
+    <link rel="stylesheet" href="assets/css/output-output.css" />
+    <link rel="stylesheet" href="assets/css/boxoutput-content.css" />
+    <link rel="stylesheet" href="assets/css/style.css" />
     <title>Encriptador de texto</title>
   </head>
   <body>
@@ -29,15 +30,20 @@
       <img class="logo" src="./assets/img/logo.png" alt="Logo" />
       <div class="box-main">
         <div class="box-input">
-          <textarea class="input__input" placeholder="Ingrese el texto aquí">Lorem ipsum dolor sit amet consectetur adipiscing elit Orci montes sit et diam risus scelerisque vitae est Tortor maecenas nunc ut laoreet Eget diam mauris quam quisque ut eget fringilla sit elit Libero sodales duis fames id diam feugiat aliquet non egestas</textarea>
+          <textarea class="input__input" placeholder="Ingrese el texto aquí" id="entrada"></textarea>
           <p>Solo letras minúsculas y sin acentos</p>
           <div class="box-input__buttons">
-            <button class="btn input__btnEncriptar">Encriptar</button>
-            <button class="btn input__btnDesencriptar">Desencriptar</button>
+            <button class="btn input__btnEncriptar" id="btnEncriptar">Encriptar</button>
+            <button class="btn input__btnDesencriptar" id="btnDesencriptar">Desencriptar</button>
           </div>
         </div>
         <div class="box-output">
-          <p class="output__output">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Orci montes, sit et diam risus scelerisque vitae est. Tortor maecenas nunc ut laoreet. Eget diam mauris quam quisque ut eget fringilla sit elit. Libero, sodales duis fames id diam feugiat aliquet non egestas.</p>
+          <p class="output__output" id="salida"></p>
+          <div class="box-output__empty">
+            <img src="assets/img/toy.png" alt="toy" />
+            <h3>Ningún mensaje fue encontrado</h3>
+            <p>Ingresa el texto que desees encriptar o desencriptar.</p>
+          </div>
         </div>
       </div>
     </div>
