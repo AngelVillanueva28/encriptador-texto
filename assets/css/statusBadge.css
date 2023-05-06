@@ -1,26 +1,28 @@
 .badge {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
   color: #ffffff;
   text-align: center;
-  padding: 16px;
+  padding: 16px 40px;
   opacity: 0;
   transition: opacity 0.3s ease;
   font-family: var(--font);
+  width: fit-content;
+  border-radius: 15px;
+  pointer-events: none;
+  font-size: 18px;
 }
 
 .badge__status-success {
-  background-color: #008000;
+  background-color: #1AAA55;
 }
 
 .badge__status-failure {
-  background-color: #800000;
+  background-color: #E85D40;
 }
 
 .badge.mostrar {
   opacity: 1;
 }
-
-.

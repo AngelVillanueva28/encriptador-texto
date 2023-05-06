@@ -23,10 +23,17 @@ const wordToLetter = {
 
 function limpiarEntrada(texto) {
   salida.value = texto;
-  console.log(salida.value);
-
   entrada.value = "";
   mostrarBotonCopiar();
+}
+
+function verificarContenido(texto){
+  if (validarEntrada(texto)) {
+    limpiarEntrada(texto);
+  } else {
+    const status = crearMensajeEstado("Ingrese un texto en el campo indicado");
+    mostrarMensajeEstado(status, "badge__status-failure");
+  }
 }
 
 btnEncriptar.addEventListener("click", () => {
@@ -35,12 +42,7 @@ btnEncriptar.addEventListener("click", () => {
     (letter) => letterToWord[letter]
   );
 
-  if (validarEntrada(texto)) {
-    limpiarEntrada(texto);
-  } else {
-    const status = crearMensajeEstado("Ingrese un texto");
-    mostrarMensajeEstado(status, "badge__status-failure");
-  }
+  verificarContenido(texto);
 });
 
 btnDesencriptar.addEventListener("click", () => {
@@ -49,9 +51,7 @@ btnDesencriptar.addEventListener("click", () => {
     (word) => wordToLetter[word]
   );
 
-  if (validarEntrada(texto)) {
-    limpiarEntrada(texto);
-  }
+  verificarContenido(texto);
 });
 
 btnCopiar.addEventListener("click", () => {
@@ -85,50 +85,40 @@ function crearMensajeEstado(mensaje) {
 }
 
 function mostrarMensajeEstado(status, estilo) {
-  status.classList.add("mostrar", estilo);
   setTimeout(() => {
-    status.classList.remove("mostrar", estilo);
-  }, 3000);
+    status.classList.add("mostrar", estilo);
+  }, 10);
+  setTimeout(() => {
+    status.classList.remove("mostrar");
+  }, 4000);
   setTimeout(() => {
     status.remove();
-  }, 3300);
+  }, 4300);
   ocultarBotonCopiar();
 }
 
 const mostrarBotonCopiar = () => {
+  
   btnCopiar.classList.remove("input__btnCopiar-ocultar");
   btnCopiar.classList.add("btn", "input__btnCopiar");
 
-  mostrarTexto();
-  mostrarMensaje();
-  console.log(entrada.value.length)
+  toggleClass(salida, "output__output-ocultar", "output__output");
+  toggleClass(salidaVacia, "box-output__empty", "box-output__fill");
+
   contador.textContent = entrada.value.length + "/450";
 };
 const ocultarBotonCopiar = () => {
   btnCopiar.classList.remove("btn", "input__btnCopiar");
   btnCopiar.classList.add("input__btnCopiar-ocultar");
 
-  ocultarTexto();
-  ocultarMensaje();
-  console.log(entrada.value.length)
+  toggleClass(salida, "output__output", "output__output-ocultar");
+  toggleClass(salidaVacia, "box-output__fill", "box-output__empty");
 };
 
 function toggleClass(tag, classToRemove, classToAdd) {
   tag.classList.remove(classToRemove);
   tag.classList.add(classToAdd);
 }
-
-const ocultarMensaje = () =>
-  toggleClass(salidaVacia, "box-output__fill", "box-output__empty");
-
-const mostrarMensaje = () =>
-  toggleClass(salidaVacia, "box-output__empty", "box-output__fill");
-
-const ocultarTexto = () =>
-  toggleClass(salida, "output__output", "output__output-ocultar");
-
-const mostrarTexto = () =>
-  toggleClass(salida, "output__output-ocultar", "output__output");
 
 function validarEntrada(content) {
   return content.length > 0;
