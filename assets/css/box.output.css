@@ -7,3 +7,12 @@
   min-height: 90vh;
   height: auto;
 }
+
+@media screen and (max-width: 768px) {
+  .box-output{
+    width: 100%;
+    min-height: auto;
+    margin: 2rem 5.5vw;
+    padding-bottom: 2rem;
+  }
+}

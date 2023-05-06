@@ -21,17 +21,23 @@ const wordToLetter = {
   ufat: "u",
 };
 
-function limpiarEntrada(texto) {
-  salida.value = texto;
-  entrada.value = "";
-  mostrarBotonCopiar();
+function validarMayusculasAcentos(texto) {
+  let patron = /[A-ZÁÉÍÓÚÜáéíóúü]/;
+  return patron.test(texto);
 }
 
-function verificarContenido(texto){
-  if (validarEntrada(texto)) {
-    limpiarEntrada(texto);
+function verificarContenido(texto) {
+  if (texto.length !== 0 && !validarMayusculasAcentos(texto)) {
+    salida.value = texto;
+    entrada.value = "";
+    entrada.style.height = "auto";
+    mostrarBotonCopiar();
   } else {
-    const status = crearMensajeEstado("Ingrese un texto en el campo indicado");
+    const status = crearMensajeEstado(
+      texto.length == 0
+        ? "Debe ingresar un texto en el campo"
+        : "Debe ingresar un texto con solo letras minúsculas y sin acento"
+    );
     mostrarMensajeEstado(status, "badge__status-failure");
   }
 }
@@ -97,13 +103,18 @@ function mostrarMensajeEstado(status, estilo) {
   ocultarBotonCopiar();
 }
 
+const mq = window.matchMedia("(max-width: 768px)");
+
 const mostrarBotonCopiar = () => {
-  
   btnCopiar.classList.remove("input__btnCopiar-ocultar");
   btnCopiar.classList.add("btn", "input__btnCopiar");
 
   toggleClass(salida, "output__output-ocultar", "output__output");
   toggleClass(salidaVacia, "box-output__empty", "box-output__fill");
+
+  if (mq.matches) {
+    salida.style.minHeight = "auto";
+  }
 
   contador.textContent = entrada.value.length + "/450";
 };
@@ -120,12 +131,8 @@ function toggleClass(tag, classToRemove, classToAdd) {
   tag.classList.add(classToAdd);
 }
 
-function validarEntrada(content) {
-  return content.length > 0;
-}
-
 entrada.addEventListener("input", () => {
-  if(entrada.value.length > 450){
+  if (entrada.value.length > 450) {
     entrada.value = entrada.value.substring(0, 450);
   }
 

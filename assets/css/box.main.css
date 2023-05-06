@@ -4,3 +4,9 @@
   min-height: 100vh;
   height: auto;
 }
+
+@media screen and (max-width: 768px) {
+  .box-main{
+    flex-wrap: wrap;
+  }
+}

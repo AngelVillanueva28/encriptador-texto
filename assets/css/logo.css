@@ -1,6 +1,13 @@
 .logo{
   position: absolute;
-  top: 5.5vh;
-  left: 5.5vh;
+  top: 8vh;
+  left: 5vw;
   pointer-events: none;
+}
+
+@media screen and (max-width: 768px) {
+  .logo{
+    top: 5vh;
+    left: 6vw;
+  }
 }

@@ -33,3 +33,15 @@
 .box-output__fill{
   display: none;
 }
+
+@media screen and (max-width: 768px){
+  .box-output__empty{
+    display: block;
+    height: auto;
+    min-height: auto;
+    margin-top: 2rem;
+  }
+  .box-output__empty img{
+    display: none;
+  }
+}

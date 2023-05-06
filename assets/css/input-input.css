@@ -18,3 +18,12 @@
 .input__input::placeholder{
   color: var(--primary-color);
 }
+
+@media screen and (max-width: 768px) {
+  .input__input{
+    margin: 0;
+    width: 100%;
+    min-height: 450px;
+    padding: 20vh 5.5vw 0 ;
+  }
+}

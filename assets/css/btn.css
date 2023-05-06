@@ -1,8 +1,17 @@
 .btn {
   border-radius: 24px;
-  padding: 24px 18%;
+  padding: 24px 0;
   font-family: var(--font);
   font-weight: 400;
   font-size: 16px;
   cursor: pointer;
+  width: 48%;
+  gap: 24px;
+  text-align: center;
+}
+
+@media screen and (max-width: 425px){
+  .btn{
+    width: 100%;
+  }
 }

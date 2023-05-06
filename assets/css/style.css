@@ -34,3 +34,9 @@
 .input__btnCopiar-ocultar{
   display: none;
 }
+
+@media screen and (max-width: 768px){
+  /* .input__btnEncriptar, .input__btnDesencriptar{
+    padding: 24px 8rem;
+  } */
+}   

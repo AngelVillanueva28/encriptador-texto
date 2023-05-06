@@ -1,7 +1,7 @@
 .output__output{
   padding: 32px;
   width: 100%;
-  min-height: 77.5vh;
+  min-height: 78vh;
   height: auto;
   color: var(--secundary-color);
   font-family: var(--font);
@@ -12,7 +12,7 @@
   border: none;
   resize: none;
   overflow: hidden;
-  /* pointer-events: none; */
+  pointer-events: none;
 }
 
 .output__output-ocultar{

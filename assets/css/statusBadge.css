@@ -26,3 +26,16 @@
 .badge.mostrar {
   opacity: 1;
 }
+
+@media screen and (max-width: 768px){
+  .badge{
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 425px){
+  .badge{
+    font-size: 12px;
+    padding: 16px;
+  }
+}
