@@ -64,23 +64,27 @@ btnCopiar.addEventListener("click", () => {
   let texto = String(salida.value);
   let status;
 
-  if (!navigator.clipboard) {
-    fallbackCopyTextToClipboard(texto);
-    return;
+  if (navigator.userAgent.match(/ipad|iphone/i)) {
+    // En iOS, debemos crear un elemento temporal para seleccionar el texto
+    let campoTemporal = document.createElement("textarea");
+    campoTemporal.value = texto;
+    document.body.appendChild(campoTemporal);
+    campoTemporal.select();
+    document.execCommand("copy");
+    document.body.removeChild(campoTemporal);
+    status = crearMensajeEstado("¡Contenido copiado al portapapeles!");
+    mostrarMensajeEstado(status, "badge__status-success");
+  } else {
+    // En otros dispositivos móviles, podemos seleccionar el texto directamente
+    salida.select();
+    document.execCommand("copy");
+    status = crearMensajeEstado("¡Contenido copiado al portapapeles!");
+    mostrarMensajeEstado(status, "badge__status-success");
   }
-
-  navigator.clipboard.writeText(texto).then(
-    function () {
-      status = crearMensajeEstado("¡Contenido copiado al portapapeles!");
-      mostrarMensajeEstado(status, "badge__status-success");
-    },
-    (err) => {
-      status = crearMensajeEstado("Error al copiar texto al portapapeles");
-    }
-  );
 
   salida.value = "";
 });
+
 
 function crearMensajeEstado(mensaje) {
   const status = document.createElement("div");
